@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  title: Node JS BACKEND API
+  description: This Is My Company Documentation Made By Me.
+  version: 1.0.0
+  contact:
+    email: siraj.backend.dev@gmail.com
+  liscence:
+    name: Apache 2.0
+  servers:
+    -url: "http://localhost:8080/api/v1"
+    description: This Is My Company Documentation Made By Me.
+
+schemes: [http, https]
+
+paths:
+  /api/v1/auth:
+    get:
+      tags:
+        - Authentication APIs
+      summary: Health Check 
+      description: >-
+        The API endpoint retrieves a random list of Health Check. When accessing this
+        endpoint, you will receive a response containing a randomly generated
+        list of Health Check.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+            example: '1'
+        - name: limit
+          in: query
+          schema:
+            type: string
+            example: '10'  
+      responses:
+        '200':
+          description: Get random user
+
+  /api/v1/auth/login:
+    post: 
+      tags:
+        - Authentication APIs
+      summary: Login API
+      description: The API endpoint Login user
+      produces:
+        - application/json
+      consumers:
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              username:
+                type: string
+              password:
+                type: string 
+      responses:
+        '200':
+          description: Post Req
+          headers:
+            set-cookie:
+              description: 'Cookie containing authentication information'
+              schema:
+                type: string    
+
+  /api/v1/auth/logout:
+    get: 
+      tags:
+        - Authentication APIs
+      summary: logout API
+      description: The API endpoint logout user
+      responses:
+        '200':
+          description: logout user
+
+  /api/v1/auth/refresh-token:
+    post: 
+      tags:
+        - Authentication APIs
+      summary: refresh-token API
+      description: The API endpoint refresh-token user
+      produces:
+        - application/json
+      consumers:
+        - application/json
+      parameters:
+        - name: user
+          in: body
+          schema:
+            type: object
+            properties:
+              refreshToken:
+                type: string
+      responses:
+        '200':
+          description: Post Req
+
+  /api/v1/subscription:
+    get:
+      tags:
+        - Subscription APIs
+      summary: Get Subscription API
+      description: The API endpoint for fetching subscription information
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      # parameters:
+      #   - name: Authorization
+      #     in: header
+      #     required: true
+      #     type: string
+      #     description: 'Bearer Token'
+      responses:
+        '200':
+          description: Get Req
+
+
+
